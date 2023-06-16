@@ -1,0 +1,38 @@
+Neste Projeto: 
+
+Foi criado uma classe [MeuObserver] que implementa a interface [Observer]. 
+Ela define o método [update], que é chamado quando o objeto observado é alterado. 
+
+Também temos uma classe [MeuObservable] que estende a classe [Observable]. 
+Ela define um método [mudarEstado] que chama os métodos [setChanged] e [notifyObservers] para notificar os observadores de que houve uma mudança.
+
+No método [main], criamos instâncias de [MeuObservable] e [MeuObserver], adicionamos o observer ao observable usando o método [addObserver] e chamamos o método [mudarEstado] para mudar o estado do observable e notificar o observer.
+
+
+
+***************
+
+import java.util.Observable;
+import java.util.Observer;
+
+class MeuObserver implements Observer {
+    public void update(Observable obj, Object arg) {
+        System.out.println("MeuObserver recebeu uma atualização!");
+    }
+}
+
+class MeuObservable extends Observable {
+    public void mudarEstado() {
+        setChanged();
+        notifyObservers();
+    }
+}
+
+public class ExemploObserver {
+    public static void main(String[] args) {
+        MeuObservable observable = new MeuObservable();
+        MeuObserver observer = new MeuObserver();
+        observable.addObserver(observer);
+        observable.mudarEstado();
+    }
+}
